@@ -137,22 +137,22 @@ def data_load(args):
         v2.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
     if args.source == ['C']:
-        s_dset_path = "../Datasets/DomainNet/clipart_train_mini.txt"
+        s_dset_path = "./Datasets/DomainNet/clipart_train_mini.txt"
     elif args.source == ['P']:
-        s_dset_path = "../Datasets/DomainNet/painting_train_mini.txt"
+        s_dset_path = "./Datasets/DomainNet/painting_train_mini.txt"
     elif args.source == ['R']:
-        s_dset_path = "../Datasets/DomainNet/real_train_mini.txt"
+        s_dset_path = "./Datasets/DomainNet/real_train_mini.txt"
     else:
-        s_dset_path = "../Datasets/DomainNet/sketch_train_mini.txt"
+        s_dset_path = "./Datasets/DomainNet/sketch_train_mini.txt"
 
     if args.target == ['C']:
-        t_dset_path = "../Datasets/DomainNet/clipart_train_mini.txt"
+        t_dset_path = "./Datasets/DomainNet/clipart_train_mini.txt"
     elif args.target == ['P']:
-        t_dset_path = "../Datasets/DomainNet/painting_train_mini.txt"
+        t_dset_path = "./Datasets/DomainNet/painting_train_mini.txt"
     elif args.target == ['R']:
-        t_dset_path = "../Datasets/DomainNet/real_train_mini.txt"
+        t_dset_path = "./Datasets/DomainNet/real_train_mini.txt"
     else:
-        t_dset_path = "../Datasets/DomainNet/sketch_train_mini.txt"
+        t_dset_path = "./Datasets/DomainNet/sketch_train_mini.txt"
     print(s_dset_path)
     print(t_dset_path)
     source_set = na_utils.ObjectImage_mul('', s_dset_path, CLDataTransform(train_transform, train_transform_strong))
@@ -262,7 +262,7 @@ def main(args: argparse.Namespace):
     for epoch in range(args.epochs):
         print("lr:", lr_scheduler.get_last_lr()[0])
         # train for one epoch
-        mem_fea_target, mem_cls_target, mem_weight_target = train(dset_loaders,  train_source_iter, train_target_iter, classifier, domain_adv, optimizer,
+        mem_fea_target, mem_cls_target = train(dset_loaders,  train_source_iter, train_target_iter, classifier, domain_adv, optimizer,
               lr_scheduler, epoch, args, mem_fea_target, mem_cls_target, mem_weight_target, mtkr)
 
         # evaluate on validation set
@@ -409,7 +409,7 @@ def train(dset_loaders, train_source_iter, train_target_iter,
             # mem_weight_target[idx_t] = W.clone()
         if i % args.print_freq == 0:
             progress.display(i)
-    return mem_fea_target, mem_cls_target, mem_weight_target
+    return mem_fea_target, mem_cls_target
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MARSD for Unsupervised Domain Adaptation')
     # dataset parameters

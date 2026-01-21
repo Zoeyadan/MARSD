@@ -17,6 +17,77 @@ from common.utils.metric import accuracy, ConfusionMatrix
 from common.utils.meter import AverageMeter, ProgressMeter
 
 
+
+def calculate_confidence_stats(loader, model, device):
+    model.eval()
+    all_confidences = []
+    all_correctness = []
+    
+    with torch.no_grad():
+        for i, (images, target, _) in enumerate(loader):
+            if isinstance(images, (list, tuple)):
+                images = images[0]
+            images = images.to(device)
+            target = target.to(device)
+
+            # 模型前向传播
+            # 注意：根据你的train代码，model返回的是(y, f)，我们需要y
+            output = model(images)
+            if isinstance(output, tuple):
+                y = output[0]
+            else:
+                y = output
+
+            # 计算Softmax概率
+            probs = torch.softmax(y, dim=1)
+            
+            # 获取最大概率（置信度）和预测类别
+            confidences, preds = torch.max(probs, dim=1)
+            
+            # 记录置信度和预测是否正确
+            all_confidences.append(confidences)
+            all_correctness.append(preds == target)
+
+    # 将所有batch的结果拼接起来
+    all_confidences = torch.cat(all_confidences)
+    all_correctness = torch.cat(all_correctness)
+
+    # 分离 正确样本 和 错误样本 的置信度
+    correct_confs = all_confidences[all_correctness]
+    wrong_confs = all_confidences[~all_correctness]
+
+    # 定义四分位点
+    quantiles = torch.tensor([0.0, 0.25, 0.5, 0.75, 1.0]).to(device)
+
+    # 1. 总体置信度四分位数
+    total_stats = torch.quantile(all_confidences, quantiles)
+    
+    # 2. 正确样本置信度四分位数 (防止为空)
+    if len(correct_confs) > 0:
+        correct_stats = torch.quantile(correct_confs, quantiles)
+    else:
+        correct_stats = torch.zeros(5)
+
+    # 3. 错误样本置信度四分位数 (防止为空)
+    if len(wrong_confs) > 0:
+        wrong_stats = torch.quantile(wrong_confs, quantiles)
+    else:
+        wrong_stats = torch.zeros(5)
+
+    # 打印结果
+    print("="*40)
+    print("Confidence Statistics (Target Domain)")
+    
+    def print_q(name, stats, count):
+        print(f"{name} \t ({count}): (0%):{stats[0]:.2f} | (25%):{stats[1]:.2f} | (50%):{stats[2]:.2f} | (75%):{stats[3]:.2f} | (100%):{stats[4]:.2f}")
+
+
+    print_q("Total Samples", total_stats, len(all_confidences))
+    print_q("Correct Predict", correct_stats, len(correct_confs))
+    print_q("Wrong Predict", wrong_stats, len(wrong_confs))
+    print()
+
+
 def get_model_names():
     return sorted(
         name for name in models.__dict__

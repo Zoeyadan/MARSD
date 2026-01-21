@@ -139,22 +139,22 @@ def data_load(args):
     ])
     
     if args.source == ['A']:
-        s_dset_path = "../Datasets/Office-Home/Art.txt"
+        s_dset_path = "./Datasets/Office-Home/Art.txt"
     elif args.source == ['C']:
-        s_dset_path = "../Datasets/Office-Home/Clipart.txt"
+        s_dset_path = "./Datasets/Office-Home/Clipart.txt"
     elif args.source == ['P']:
-        s_dset_path = "../Datasets/Office-Home/Product.txt"
+        s_dset_path = "./Datasets/Office-Home/Product.txt"
     else:
-        s_dset_path = "../Datasets/Office-Home/Real_World.txt"
+        s_dset_path = "./Datasets/Office-Home/Real_World.txt"
 
     if args.target == ['A']:
-        t_dset_path = "../Datasets/Office-Home/Art.txt"
+        t_dset_path = "./Datasets/Office-Home/Art.txt"
     elif args.target == ['C']:
-        t_dset_path = "../Datasets/Office-Home/Clipart.txt"
+        t_dset_path = "./Datasets/Office-Home/Clipart.txt"
     elif args.target == ['P']:
-        t_dset_path = "../Datasets/Office-Home/Product.txt"
+        t_dset_path = "./Datasets/Office-Home/Product.txt"
     else:
-        t_dset_path = "../Datasets/Office-Home/Real_World.txt"
+        t_dset_path = "./Datasets/Office-Home/Real_World.txt"
     print(s_dset_path)
     print(t_dset_path)
     source_set = na_utils.ObjectImage_mul('', s_dset_path, CLDataTransform(train_transform, train_transform_strong))
