@@ -5,9 +5,9 @@
 
 Manual install pytorch 2.6 from https://pytorch.org/get-started/previous-versions/
 Install  python  environment.
-"""
+```
 pip install -r requirements.txt
-"""
+```
 ## Data Preparation
 Please follow the instructions to prepare all datasets.
 Datasets list:
