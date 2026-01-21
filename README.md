@@ -39,18 +39,18 @@ python MARSD_Home.py data/office-home -d OfficeHome -s R -t P -a resnet50 --epoc
 
 Using the `MARSD_DomainNet.py` file for training. Sample commands to execute the training of the MARSD methods on DomainNet dataset  can be found below.
 ```
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t C -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_R2C
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t P -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_R2P
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t S -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_R2S
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s C -t R -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_C2R
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s C -t P -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_C2P
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s C -t S -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_C2S
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s P -t R -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_P2R
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s P -t C -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_P2C
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s P -t S -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_P2S
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s S -t R -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_S2R
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s S -t C -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_S2C
-python MARSD_DomainNet.py data/DomainNet -d DomainNet -s S -t P -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNetP_S2P
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t C -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_R2C
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t P -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_R2P
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t S -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_R2S
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s C -t R -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_C2R
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s C -t P -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_C2P
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s C -t S -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_C2S
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s P -t R -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_P2R
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s P -t C -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_P2C
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s P -t S -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_P2S
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s S -t R -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_S2R
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s S -t C -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_S2C
+python MARSD_DomainNet.py data/DomainNet -d DomainNet -s S -t P -a  --epochs 20 -i 500 --seed 1 --log logs/MARSD/DomainNet_S2P
 ```
 
 ### Visualization
@@ -65,7 +65,7 @@ python MARSD_DomainNet.py data/DomainNet -d DomainNet -s R -t C -a resnet50  --l
 Generally, all scripts in the project take the following flags
 - `DIR`: dataset path(data/|OfficeHome|DomainNet|ImageCLEF|)
 - `-a`: Architecture of the backbone. (resnet50|resnet101)
-- `-d`: Dataset (||OfficeHome|DomainNet|VisDA2017) 
+- `-d`: Dataset (||OfficeHome|DomainNet|ImageCLEF) 
 - `-s`: Source Domain
 - `-t`: Target Domain
 - `--epochs`: Number of Epochs to be trained for.
